@@ -1,0 +1,20 @@
+# SML/NJ and CM build artifacts
+*.uo
+*.heap
+*/.cm/
+
+# Editor and OS files
+*~
+*.swp
+.DS_Store
+.vscode/
+.idea/
+
+# Virtual environments and dependencies
+venv/
+.env
+node_modules/
+
+# Build directories
+_build/
+build/
