@@ -1,0 +1,34 @@
+Library
+  signature CATEGORY
+  signature GROUPOID
+  signature PRESHEAF
+  functor OppositeCategory
+  functor OppositeGroupoid
+  functor ProductCategory
+  functor ProductGroupoid
+  functor FunctorCategory
+  functor FunctorGroupoid
+  functor DiscreteCategory
+  functor DiscreteGroupoid
+  functor Monoidal
+  functor Pointed
+  functor FunctorComposition
+  functor EndofunctorMonoidal
+  functor CartesianIntoTerminal
+is
+  src/category.sig
+  src/groupoid.sig
+  src/presheaf.sig
+  src/opposite-category.sml
+  src/opposite-groupoid.sml
+  src/product-category.sml
+  src/product-groupoid.sml
+  src/functor-category.sml
+  src/functor-groupoid.sml
+  src/discrete-category.sml
+  src/discrete-groupoid.sml
+  src/monoidal.sml
+  src/pointed.sml
+  src/functor-composition.sml
+  src/endofunctor-monoidal.sml
+  src/cartesian-into-terminal.sml
