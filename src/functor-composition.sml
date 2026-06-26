@@ -34,7 +34,7 @@ struct
       DtoE.obj * CtoD.obj -> DtoE.morph * CtoD.morph -> CtoE.morph =
     fn (f, g) => fn (n, m) => {
       component = fn x =>
-        E.comp (#component n (#mapobj g x)) (#mapmorph f (#component m x)) }
+        E.comp (#component n (#mapobj g x), #mapmorph f (#component m x)) }
 
   (*The horizontal composite of natural transformations `n, m`,
     given the destination functor of `n` and the source functor of `m`.
@@ -45,5 +45,5 @@ struct
       DtoE.obj * CtoD.obj -> DtoE.morph * CtoD.morph -> CtoE.morph =
     fn (f, g) => fn (n, m) => {
       component = fn x =>
-        E.comp (#mapmorph f (#component m x)) (#component n (#mapobj g x)) }
+        E.comp (#mapmorph f (#component m x), #component n (#mapobj g x)) }
 end

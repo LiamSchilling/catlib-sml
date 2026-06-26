@@ -1,4 +1,4 @@
-(*The types of (strict) monoidal and cartesian structures on a category `C`. *)
+(*The types of monoidal and cartesian structures on a category `C`. *)
 functor Monoidal (C : CATEGORY) =
 struct
   (*A reference to the category of bifunctors on `C`. *)

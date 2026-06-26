@@ -1,7 +1,7 @@
 Library
   signature CATEGORY
   signature GROUPOID
-  signature COPRESHEAF
+  signature PRESHEAF
   functor OppositeCategory
   functor OppositeGroupoid
   functor ProductCategory

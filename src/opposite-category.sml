@@ -12,9 +12,9 @@ struct
   type morpherror = C.morpherror
   exception MorphType = C.MorphType
 
-  fun check a x y = C.check a y x
+  fun check a (x, y) = C.check a (y, x)
 
   fun id x = C.id x
 
-  fun comp a b = C.comp b a
+  fun comp (a, b) = C.comp (b, a)
 end

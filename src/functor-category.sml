@@ -18,11 +18,11 @@ struct
   datatype morpherror = UnimplementedUndecidable
   exception MorphType of morpherror
 
-  fun check n f g = raise MorphType UnimplementedUndecidable
+  fun check n (f, g) = raise MorphType UnimplementedUndecidable
 
   fun id (f: obj) = {
     component = fn x => D.id (#mapobj f x) }
 
-  fun comp (n: morph) (m: morph) = {
-    component = fn x => D.comp (#component n x) (#component m x) }
+  fun comp (n: morph, m: morph) = {
+    component = fn x => D.comp (#component n x, #component m x) }
 end

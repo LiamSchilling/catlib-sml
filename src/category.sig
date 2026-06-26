@@ -10,9 +10,9 @@ sig
   exception MorphType of morpherror
 
   (*Type checks a morphism against its source and destination objects.
-    `check m x y` should succeed when `m : morph[x, y]`,
+    `check a (x, y)` should succeed when `a : morph[x, y]`,
     and otherwise raise `MorphType`. *)
-  val check : morph -> obj -> obj -> unit
+  val check : morph -> obj * obj -> unit
 
   (*The identity morphism for an object.
   val id : forall x -> morph[x, x] *)
@@ -20,6 +20,6 @@ sig
 
   (*Composition of morphisms.
     The behavior is undefined when the input morphisms are ill-typed.
-  val comp : morph[y, z] -> morph[x, y] -> morph[x, z] *)
-  val comp : morph -> morph -> morph
+  val comp : morph[y, z] * morph[x, y] -> morph[x, z] *)
+  val comp : morph * morph -> morph
 end

@@ -7,19 +7,19 @@ struct
   (*The type of objects is provided. *)
   type obj = T.t
 
-  (*The only morphisms are the trivial identity morphisms *)
+  (*The only morphisms are the trivial identity morphisms. *)
   type morph = unit
 
-  datatype morpherror = UnequalObjects of obj * obj
+  datatype morpherror = UnequalObjects
   exception MorphType of morpherror
 
-  fun check () x y =
+  fun check () (x, y) =
     if T.equiv (x, y) then
       ()
     else
-      raise MorphType (UnequalObjects (x, y))
+      raise MorphType UnequalObjects
 
   fun id _ = ()
 
-  fun comp () () = ()
+  fun comp ((), ()) = ()
 end
