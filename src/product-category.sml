@@ -11,17 +11,9 @@ struct
   datatype morpherror = LeftError of C.morpherror | RightError of D.morpherror
   exception MorphType of morpherror
 
-  (*Run a thunk, forwarding `C.MorphType` errors as `MorphType` errors. *)
-  fun liftLeftError (f : unit -> 'a) =
-    f () handle C.MorphType e => raise MorphType (LeftError e)
-
-  (*Run a thunk, forwarding `D.MorphType` errors as `MorphType` errors. *)
-  fun liftRightError (f : unit -> 'a) =
-    f () handle D.MorphType e => raise MorphType (RightError e)
-
   fun check (a, b) (x, y) (z, w) = (
-    liftLeftError (fn () => C.check a x z);
-    liftRightError (fn () => D.check b y w) )
+    C.check a x z handle C.MorphType e => raise MorphType (LeftError e);
+    D.check b y w handle D.MorphType e => raise MorphType (RightError e) )
 
   fun id (x, y) = (C.id x, D.id y)
 

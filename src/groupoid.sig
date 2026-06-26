@@ -1,5 +1,5 @@
 (*A groupoid is a category in which
-  every morphism has an inverse as defined below. *)
+  every morphism has an inverse, as defined below. *)
 signature GROUPOID =
 sig
   include CATEGORY

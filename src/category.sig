@@ -1,6 +1,6 @@
 (*A category is a collection of objects `obj` and,
   for any pair of objects `x, y`, a collection of morphisms `morph[x, y]`,
-  with identity and composition morphisms as defined below. *)
+  with identity and composition of morphisms as defined below. *)
 signature CATEGORY =
 sig
   type obj

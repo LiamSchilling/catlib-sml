@@ -1,8 +1,8 @@
-(*We use the term "co-presheaf" to mean a set-valued functor on `C`.
-  The SML approximation is a type `t[x]` for each object `x` of `C`,
+(*We use the term "co-presheaf" to mean a set-valued functor on `D`.
+  The SML approximation is a type `t[x]` for each object `x` of `D`,
   all coalesced into the combined type `t`.
-  The typical definition of a presheaf on `D` is recovered
-  by having `C` as the opposite category of `D`. *)
+  The typical definition of a presheaf on `C` is recovered
+  by having `D` as the opposite category of `C`. *)
 signature COPRESHEAF =
 sig
   (*The domain category of the functor *)

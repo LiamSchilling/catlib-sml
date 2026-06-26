@@ -15,7 +15,7 @@ struct
     it is impossible to express the horizontal composite of
     (a.k.a. the action of functor composition on) natural transformations
     given only references to the transformations themselves. *)
-  exception UnimplementedUnexpressible of DtoE.morph * CtoD.morph
+  exception UnimplementedUnexpressible
 
   (*The composition of functors,
     as a bifunctor on the categories of functors. *)
@@ -23,7 +23,7 @@ struct
       mapobj = fn (f, g) => {
         mapobj = (#mapobj f) o (#mapobj g),
         mapmorph = (#mapmorph f) o (#mapmorph g) },
-      mapmorph = fn (n, m) => raise UnimplementedUnexpressible (n, m) }
+      mapmorph = fn (n, m) => raise UnimplementedUnexpressible }
 
   (*The horizontal composite of natural transformations `n, m`,
     given the source functor of `n` and the destination functor of `m`.
