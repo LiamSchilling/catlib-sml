@@ -5,7 +5,7 @@ struct
     with natural isomorphisms as morphisms. *)
   structure CCtoC = FunctorIsoGroupoid(ProductCategory(C)(C))(C)
 
-  (*The type of monoidal structures.
+  (*The type of (strict) monoidal structures.
   type monoidal = {
     unit: C.obj,
     tensor: functor[C * C, C] } *)
@@ -13,7 +13,9 @@ struct
     unit: C.obj,
     tensor: CCtoC.obj }
 
-  (*The type of symmetric monoidal structures.
+  (*The type of symmetric monoidal structures,
+    where the associativity and unit laws are strict,
+    but symmetry is given by an isomorphism `swapmap`.
   type symmetricmonoidal = {
     unit: C.obj,
     tensor: functor[C * C, C],
@@ -23,7 +25,9 @@ struct
     tensor: CCtoC.obj,
     swapmap: CCtoC.morph }
 
-  (*The type of cartesian structures.
+  (*The type of cartesian structures,
+    where the associativity and unit laws are strict,
+    but symmetry is given by an isomorphism `swapmap`.
     The behavior of `pair` is undefined when the input morphisms are ill-typed.
   type cartesian = {
     unit: C.obj,
@@ -43,12 +47,14 @@ struct
     pair: C.morph -> C.morph -> C.morph }
 
   (*A symmetric monoidal category is trivially a monoidal category. *)
-  val symmetricMonoidalIntoMonoidal : symmetricmonoidal -> monoidal = fn s => {
+  val symmetricMonoidalIntoMonoidal :
+      symmetricmonoidal -> monoidal = fn s => {
     unit = #unit s,
     tensor = #tensor s }
 
   (*A cartesian category is trivially a symmetric monoidal category. *)
-  val cartesianIntoSymmetricMonoidal : cartesian -> symmetricmonoidal = fn c => {
+  val cartesianIntoSymmetricMonoidal :
+      cartesian -> symmetricmonoidal = fn c => {
     unit = #unit c,
     tensor = #product c,
     swapmap = #swapmap c }

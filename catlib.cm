@@ -6,6 +6,8 @@ Library
   functor OppositeGroupoid
   functor ProductCategory
   functor ProductGroupoid
+  functor ListCategory
+  functor ListGroupoid
   functor FunctorCategory
   functor FunctorGroupoid
   functor FunctorIsoGroupoid
@@ -24,6 +26,8 @@ is
   src/opposite-groupoid.sml
   src/product-category.sml
   src/product-groupoid.sml
+  src/list-category.sml
+  src/list-groupoid.sml
   src/functor-category.sml
   src/functor-groupoid.sml
   src/functor-iso-groupoid.sml
