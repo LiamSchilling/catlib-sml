@@ -30,6 +30,6 @@ struct
     from = CtoD.comp (#from m, #from n) }
 
   fun inv (n: morph) = {
-    to = #from m,
-    from = #to m }
+    to = #from n,
+    from = #to n }
 end
