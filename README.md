@@ -1,6 +1,6 @@
 # Category Theory Library of SML
 
-A development of categorical structures and their transformations, with applications in categorical semantics, compilers and code transformations, effect simulation, symbolic algebra and rewrite systems...
+A development of categorical structures and their transformations, with applications in programming language semantics, compilers and code transformations, effect simulation, symbolic algebra and rewrite systems...
 
 ## Project Structure
 
@@ -14,7 +14,7 @@ A development of categorical structures and their transformations, with applicat
 
 - [`opposite-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/opposite-category.sml), [`opposite-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/opposite-groupoid.sml): The opposite category/groupoid.
 - [`product-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/product-category.sml), [`product-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/product-groupoid.sml): The product construction category/groupoid.
-- [`functor-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/functor-category.sml), [`functor-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/functor-groupoid.sml): The category/groupoid of functors. Defines functors and natural transformations, with component-wise identity, composition, and inversion of natural transformations.
+- [`functor-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/functor-category.sml), [`functor-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/functor-groupoid.sml), [`functor-iso-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/functor-iso-groupoid.sml): Categories/groupoids of functors. Defines functors and natural transformations/isomorphisms, with component-wise identity, composition, and inversion of natural transformations/isomorphisms.
 - [`discrete-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/discrete-category.sml), [`discrete-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/discrete-groupoid.sml): The discrete category/groupoid on a type of objects.
 
 #### Definitions of structures in categories

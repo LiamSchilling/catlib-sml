@@ -8,6 +8,7 @@ Library
   functor ProductGroupoid
   functor FunctorCategory
   functor FunctorGroupoid
+  functor FunctorIsoGroupoid
   functor DiscreteCategory
   functor DiscreteGroupoid
   functor Monoidal
@@ -25,6 +26,7 @@ is
   src/product-groupoid.sml
   src/functor-category.sml
   src/functor-groupoid.sml
+  src/functor-iso-groupoid.sml
   src/discrete-category.sml
   src/discrete-groupoid.sml
   src/monoidal.sml
