@@ -30,7 +30,7 @@ A development of categorical structures and their transformations, with applicat
 
 ## Design Notes
 
-#### Value-dependent typing rules and equational laws
+### Value-dependent typing rules and equational laws
 
 In the type system of SML, it is impossible to formally enforce all the desired invariants and equational laws of the data structures we define. This greatly reduces the proof burden on the implementer of such data structures, but one must be weary of the absence of static guarantees. When relevant, we use an informal language of dependent types in our documentation, in which SML types (e.g. `morph`, the type of morphisms) are annotated with value-level refinements (e.g. `morph[x, y]`, the type of morphisms from the object `x` to the object `y`). For instance, the type of morphisms and the function providing a category's identity morphisms might be declared as follows, with the documentation listing rich, informal type signatures.
 
