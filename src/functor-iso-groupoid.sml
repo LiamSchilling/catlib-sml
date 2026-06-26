@@ -29,7 +29,7 @@ struct
     to = CtoD.comp (#to n, #to m),
     from = CtoD.comp (#from m, #from n) }
 
-  fun inv (m : morph) = {
+  fun inv (n: morph) = {
     to = #from m,
     from = #to m }
 end
