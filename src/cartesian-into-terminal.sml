@@ -1,8 +1,8 @@
 functor CartesianIntoTerminal (C : CATEGORY) =
 struct
   (*References to the types of various structures on `C`. *)
-  structure M = Monoidal(C)
-  structure P = Pointed(C)
+  structure M = MonoidalOf(C)
+  structure P = PointedOf(C)
 
   (*The left-projections of a cartesian category
     induce a terminal structure on its unit. *)

@@ -1,3 +1,14 @@
+structure FunctIso =
+struct
+  (*The morphisms are natural isomorphisms between functors `f, g`.
+  type natiso[f, g] = {
+    to: nattrans[f, g],
+    from: nattrans[g, f] } *)
+  type ('Cobj, 'Dmorph) natiso = {
+    to: ('Cobj, 'Dmorph) Funct.nattrans,
+    from: ('Cobj, 'Dmorph) Funct.nattrans }
+end
+
 (*The groupoid of functors between categories `C, D`,
   with natural isomorphisms as morphisms. *)
 functor FunctorIsoGroupoid (C : CATEGORY) (D : CATEGORY) : GROUPOID =
@@ -5,16 +16,8 @@ struct
   (*A reference to the category of functors. *)
   structure CtoD = FunctorCategory(C)(D)
 
-  (*The objects are functors. *)
-  type obj = CtoD.obj
-
-  (*The morphisms are natural isomorphisms between functors `f, g`.
-  type morph[f, g] = {
-    to: nattrans[f, g],
-    from: nattrans[g, f] } *)
-  type morph = {
-    to: CtoD.morph,
-    from: CtoD.morph }
+  type obj = (C.obj, C.morph, D.obj, D.morph) Funct.funct
+  type morph = (C.obj, D.morph) FunctIso.natiso
 
   datatype morpherror = UnimplementedUndecidable
   exception MorphType of morpherror

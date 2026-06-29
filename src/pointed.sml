@@ -1,31 +1,38 @@
-(*The types of initial, terminal, and zero objects in a category `C`. *)
-functor Pointed (C : CATEGORY) =
+structure Pointed =
 struct
   (*The type of initial objects.
-  type initial = {
+  type initial[C] = {
     obj: C.obj,
     from: forall x -> morph[obj, x] } *)
-  type initial = {
-    obj: C.obj,
-    from: C.obj -> C.morph }
+  type ('Cobj, 'Cmorph) initial = {
+    obj: 'Cobj,
+    from: 'Cobj -> 'Cmorph }
 
   (*The type of terminal objects.
-  type terminal = {
+  type terminal[C] = {
     obj: C.obj,
     to: forall x -> morph[x, obj] } *)
-  type terminal = {
-    obj: C.obj,
-    to: C.obj -> C.morph }
+  type ('Cobj, 'Cmorph) terminal = {
+    obj: 'Cobj,
+    to: 'Cobj -> 'Cmorph }
 
   (*The type of zero objects.
-  type zero = {
+  type zero[C] = {
     obj: C.obj,
     from: forall x -> morph[obj, x],
     to: forall x -> morph[x, obj] } *)
-  type zero = {
-    obj: C.obj,
-    from: C.obj -> C.morph,
-    to: C.obj -> C.morph }
+  type ('Cobj, 'Cmorph) zero = {
+    obj: 'Cobj,
+    from: 'Cobj -> 'Cmorph,
+    to: 'Cobj -> 'Cmorph }
+end
+
+(*The types of initial, terminal, and zero objects in a category `C`. *)
+functor PointedOf (C : CATEGORY) =
+struct
+  type initial = (C.obj, C.morph) Pointed.initial
+  type terminal = (C.obj, C.morph) Pointed.terminal
+  type zero = (C.obj, C.morph) Pointed.zero
 
   (*A zero object is trivially an initial object. *)
   val zeroIntoInitial : zero -> initial = fn z => {

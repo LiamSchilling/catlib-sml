@@ -3,7 +3,7 @@
 functor EndofunctorMonoidal (C : CATEGORY) =
 struct
   (*A reference to the type of monoidal structures. *)
-  structure M = Monoidal(FunctorCategory(C)(C))
+  structure M = MonoidalOf(FunctorCategory(C)(C))
   
   (*A reference to the implementation of functor composition. *)
   structure Comp = FunctorComposition(C)(C)(C)

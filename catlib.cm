@@ -8,16 +8,21 @@ Library
   functor ProductGroupoid
   functor ListCategory
   functor ListGroupoid
+  structure Funct
   functor FunctorCategory
   functor FunctorGroupoid
+  structure FunctIso
   functor FunctorIsoGroupoid
   functor DiscreteCategory
   functor DiscreteGroupoid
-  functor Monoidal
-  functor Pointed
+  structure Monoidal
+  functor MonoidalOf
+  structure Pointed
+  functor PointedOf
   functor FunctorComposition
   functor EndofunctorMonoidal
   functor CartesianIntoTerminal
+  signature TERMLANGUAGE
 is
   src/category.sig
   src/groupoid.sig
@@ -38,3 +43,4 @@ is
   src/functor-composition.sml
   src/endofunctor-monoidal.sml
   src/cartesian-into-terminal.sml
+  src/programming-languages/term-language.sml

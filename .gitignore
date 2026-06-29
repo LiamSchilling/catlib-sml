@@ -1,7 +1,7 @@
 # SML/NJ and CM build artifacts
 *.uo
 *.heap
-*/.cm/
+*.cm
 
 # Editor and OS files
 *~

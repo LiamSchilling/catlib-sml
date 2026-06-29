@@ -1,35 +1,30 @@
-(*The types of monoidal and cartesian structures on a category `C`. *)
-functor Monoidal (C : CATEGORY) =
+structure Monoidal =
 struct
-  (*A reference to the category of bifunctors on `C`,
-    with natural isomorphisms as morphisms. *)
-  structure CCtoC = FunctorIsoGroupoid(ProductCategory(C)(C))(C)
-
   (*The type of (strict) monoidal structures.
-  type monoidal = {
+  type monoidal[C] = {
     unit: C.obj,
     tensor: functor[C * C, C] } *)
-  type monoidal = {
-    unit: C.obj,
-    tensor: CCtoC.obj }
+  type ('Cobj, 'Cmorph) monoidal = {
+    unit: 'Cobj,
+    tensor: ('Cobj * 'Cobj, 'Cmorph * 'Cmorph, 'Cobj, 'Cmorph) Funct.funct }
 
   (*The type of symmetric monoidal structures,
     where the associativity and unit laws are strict,
     but symmetry is given by an isomorphism `swapmap`.
-  type symmetricmonoidal = {
+  type symmetricmonoidal[C] = {
     unit: C.obj,
     tensor: functor[C * C, C],
     swapmap: natiso[tensor, swap tensor] } *)
-  type symmetricmonoidal = {
-    unit: C.obj,
-    tensor: CCtoC.obj,
-    swapmap: CCtoC.morph }
+  type ('Cobj, 'Cmorph) symmetricmonoidal = {
+    unit: 'Cobj,
+    tensor: ('Cobj * 'Cobj, 'Cmorph * 'Cmorph, 'Cobj, 'Cmorph) Funct.funct,
+    swapmap: ('Cobj * 'Cobj, 'Cmorph) Funct.nattrans }
 
   (*The type of cartesian structures,
     where the associativity and unit laws are strict,
     but symmetry is given by an isomorphism `swapmap`.
     The behavior of `pair` is undefined when the input morphisms are ill-typed.
-  type cartesian = {
+  type cartesian[C] = {
     unit: C.obj,
     product: functor[C * C, C],
     swapmap: natiso[tensor, swap tensor],
@@ -38,13 +33,21 @@ struct
     pair:
       C.morph[x, y] -> C.morph[x, z] ->
       C.morph[x, #mapobj product (y, z)] } *)
-  type cartesian = {
-    unit: C.obj,
-    product: CCtoC.obj,
-    swapmap: CCtoC.morph,
-    leftproj: C.obj -> C.obj -> C.morph,
-    rightproj: C.obj -> C.obj -> C.morph,
-    pair: C.morph -> C.morph -> C.morph }
+  type ('Cobj, 'Cmorph) cartesian = {
+    unit:'Cobj,
+    product: ('Cobj * 'Cobj, 'Cmorph * 'Cmorph, 'Cobj, 'Cmorph) Funct.funct,
+    swapmap: ('Cobj * 'Cobj, 'Cmorph) Funct.nattrans,
+    leftproj: 'Cobj -> 'Cobj -> 'Cmorph,
+    rightproj: 'Cobj -> 'Cobj -> 'Cmorph,
+    pair: 'Cmorph -> 'Cmorph -> 'Cmorph }
+end
+
+(*The types of monoidal and cartesian structures on a category `C`. *)
+functor MonoidalOf (C : CATEGORY) =
+struct
+  type monoidal = (C.obj, C.morph) Monoidal.monoidal
+  type symmetricmonoidal = (C.obj, C.morph) Monoidal.symmetricmonoidal
+  type cartesian = (C.obj, C.morph) Monoidal.cartesian
 
   (*A symmetric monoidal category is trivially a monoidal category. *)
   val symmetricMonoidalIntoMonoidal :
