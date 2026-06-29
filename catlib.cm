@@ -22,7 +22,6 @@ Library
   functor FunctorComposition
   functor EndofunctorMonoidal
   functor CartesianIntoTerminal
-  signature TERMLANGUAGE
 is
   src/category.sig
   src/groupoid.sig
@@ -43,4 +42,3 @@ is
   src/functor-composition.sml
   src/endofunctor-monoidal.sml
   src/cartesian-into-terminal.sml
-  src/programming-languages/term-language.sml
