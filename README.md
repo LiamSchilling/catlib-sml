@@ -31,7 +31,7 @@ A development of categorical structures and their transformations, with applicat
 
 #### Applications in Programming Languages
 
-- [`term-language-template.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/programming-languages/term-language-template.sig), [`term-language.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/programming-languages/term-language.sig), [`make-term-language.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/programming-languages/make-term-language.sml): Defines a term language as a category of types, a cartesian category of contexts and substitutions, and a set-valued functor from contexts `ctx` and types `t` into sets of terms `tm[ctx, t]`. The variance is so that `tm[-, t]` is a presheaf on the context category, as usual.
+- [`term-language-template.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/programming-languages/term-language-template.sig), [`term-language.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/programming-languages/term-language.sig), [`make-term-language.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/programming-languages/make-term-language.sml): Defines a term language as a category of types, a cartesian category of contexts and substitutions, and a set-valued functor from contexts `ctx` and types `t` into sets of terms `tm[ctx, t]`. The variance is so that `tm[-, t]` is a presheaf on the context category, as usual. Additionally, implements the transformation from a minimal specification of a term language into the full categorical interface, which includes an implementation of the context and substitution category.
 
 ## Design Notes
 
