@@ -11,8 +11,6 @@ Library
   structure Funct
   functor FunctorCategory
   functor FunctorGroupoid
-  structure FunctIso
-  functor FunctorIsoGroupoid
   functor DiscreteCategory
   functor DiscreteGroupoid
   structure Monoidal
@@ -22,6 +20,9 @@ Library
   functor FunctorComposition
   functor EndofunctorMonoidal
   functor CartesianIntoTerminal
+  signature TERMLANGUAGETEMPLATE
+  signature TERMLANGUAGE
+  functor MakeTermLanguage
 is
   src/category.sig
   src/groupoid.sig
@@ -34,7 +35,6 @@ is
   src/list-groupoid.sml
   src/functor-category.sml
   src/functor-groupoid.sml
-  src/functor-iso-groupoid.sml
   src/discrete-category.sml
   src/discrete-groupoid.sml
   src/monoidal.sml
@@ -42,3 +42,6 @@ is
   src/functor-composition.sml
   src/endofunctor-monoidal.sml
   src/cartesian-into-terminal.sml
+  src/programming-languages/term-language-template.sig
+  src/programming-languages/term-language.sig
+  src/programming-languages/make-term-language.sml

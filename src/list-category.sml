@@ -13,7 +13,8 @@ struct
 
   fun checkFrom i [] ([], []) = ()
     | checkFrom i (a :: A) (x :: X, y :: Y) = (
-      C.check a (x, y) handle C.MorphType e => raise MorphType (ErrorAt (i, e));
+      C.check a (x, y) handle C.MorphType e =>
+        raise MorphType (ErrorAt (i, e));
       checkFrom (i + 1) A (X, Y) )
     | checkFrom i _ (_, _) = raise MorphType IllFormed
 

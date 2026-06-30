@@ -14,7 +14,7 @@ struct
   type symmetricmonoidal[C] = {
     unit: C.obj,
     tensor: functor[C * C, C],
-    swapmap: natiso[tensor, swap tensor] } *)
+    swapmap: nattrans[tensor, swap tensor] } *)
   type ('Cobj, 'Cmorph) symmetricmonoidal = {
     unit: 'Cobj,
     tensor: ('Cobj * 'Cobj, 'Cmorph * 'Cmorph, 'Cobj, 'Cmorph) Funct.funct,
@@ -27,19 +27,19 @@ struct
   type cartesian[C] = {
     unit: C.obj,
     product: functor[C * C, C],
-    swapmap: natiso[tensor, swap tensor],
-    leftproj: forall x y -> C.morph[#mapobj product (x, y), x],
-    rightproj: forall x y -> C.morph[#mapobj product (x, y), y],
+    swapmap: nattrans[tensor, swap tensor],
+    leftproj: forall (x, y) -> C.morph[#mapobj product (x, y), x],
+    rightproj: forall (x, y) -> C.morph[#mapobj product (x, y), y],
     pair:
-      C.morph[x, y] -> C.morph[x, z] ->
+      C.morph[x, y] * C.morph[x, z] ->
       C.morph[x, #mapobj product (y, z)] } *)
   type ('Cobj, 'Cmorph) cartesian = {
-    unit:'Cobj,
+    unit: 'Cobj,
     product: ('Cobj * 'Cobj, 'Cmorph * 'Cmorph, 'Cobj, 'Cmorph) Funct.funct,
     swapmap: ('Cobj * 'Cobj, 'Cmorph) Funct.nattrans,
-    leftproj: 'Cobj -> 'Cobj -> 'Cmorph,
-    rightproj: 'Cobj -> 'Cobj -> 'Cmorph,
-    pair: 'Cmorph -> 'Cmorph -> 'Cmorph }
+    leftproj: 'Cobj * 'Cobj -> 'Cmorph,
+    rightproj: 'Cobj * 'Cobj -> 'Cmorph,
+    pair: 'Cmorph * 'Cmorph -> 'Cmorph }
 end
 
 (*The types of monoidal and cartesian structures on a category `C`. *)
