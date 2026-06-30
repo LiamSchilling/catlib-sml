@@ -1,17 +1,21 @@
-(*The discrete category on a type of objects. *)
+(* The discrete category on a type of objects. *)
 functor DiscreteCategory (T : sig
   type t
   val equiv : t * t -> bool
 end) : CATEGORY =
 struct
-  (*The type of objects is provided. *)
+  (* The type of objects is provided. *)
   type obj = T.t
 
-  (*The only morphisms are the trivial identity morphisms. *)
+  (* The only morphisms are the trivial identity morphisms. *)
   type morph = unit
 
   datatype morpherror = UnequalObjects
   exception MorphType of morpherror
+
+  fun objequiv (x, y) = T.equiv (x, y)
+
+  fun morphequiv ((), ()) = true
 
   fun check () (x, y) =
     if T.equiv (x, y) then

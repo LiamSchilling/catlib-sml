@@ -1,4 +1,4 @@
-(*The product of groupoids `G, H`. *)
+(* The product of groupoids `G, H`. *)
 functor ProductGroupoid (G : GROUPOID) (H : GROUPOID) : GROUPOID =
 struct
   structure C = ProductCategory(G)(H)

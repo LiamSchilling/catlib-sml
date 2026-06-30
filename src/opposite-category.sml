@@ -1,16 +1,20 @@
-(*The opposite category of `C`. *)
+(* The opposite category of `C`. *)
 functor OppositeCategory (C : CATEGORY) : CATEGORY =
 struct
-  (*The objects of the opposite category are identical. *)
+  (* The objects of the opposite category are identical. *)
   type obj = C.obj
 
-  (*The opposite morphisms
-    have their source and destination objects reversed.
+  (* The opposite morphisms
+     have their source and destination objects reversed.
   type morph[x, y] = C.morph[y, x] *)
   type morph = C.morph
 
   type morpherror = C.morpherror
   exception MorphType = C.MorphType
+
+  fun objequiv (x, y) = C.objequiv (x, y)
+
+  fun morphequiv (x, y) = C.morphequiv (x, y)
 
   fun check a (x, y) = C.check a (y, x)
 

@@ -1,4 +1,4 @@
-(*The opposite groupoid of `G`. *)
+(* The opposite groupoid of `G`. *)
 functor OppositeGroupoid (G : GROUPOID) : GROUPOID =
 struct
   structure C = OppositeCategory(G)

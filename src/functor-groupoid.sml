@@ -1,4 +1,4 @@
-(*The groupoid of functors from a category `C` to a groupoid `G`. *)
+(* The groupoid of functors from a category `C` to a groupoid `G`. *)
 functor FunctorGroupoid (D : CATEGORY) (G : GROUPOID) : GROUPOID =
 struct
   structure C = FunctorCategory(D)(G)

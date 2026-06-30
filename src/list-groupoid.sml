@@ -1,4 +1,4 @@
-(*The free finite product groupoid on `G`. *)
+(* The free finite product groupoid on `G`. *)
 functor ListGroupoid (G : GROUPOID) : GROUPOID =
 struct
   structure C = ListCategory(G)

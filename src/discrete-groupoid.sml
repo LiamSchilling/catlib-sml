@@ -1,4 +1,4 @@
-(*The discrete groupoid on a type of objects. *)
+(* The discrete groupoid on a type of objects. *)
 functor DiscreteGroupoid (T : sig
   type t
   val equiv : t * t -> bool
