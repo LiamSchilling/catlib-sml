@@ -6,35 +6,35 @@ A development of categorical structures and their transformations, with applicat
 
 #### Fundemental definitions
 
-- [`category.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/category.sig): Defines a category.
-- [`groupoid.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/groupoid.sig): Defines a groupoid.
-- [`presheaf.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/presheaf.sig): Defines a presheaf.
-- [`labeled-digraph.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/labeled-digraph.sig): Defines a labeled directed graph (essentially a category not equipped with identities or composition).
+- [`category.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/definitions/category.sig): Defines a category.
+- [`groupoid.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/definitions/groupoid.sig): Defines a groupoid.
+- [`presheaf.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/definitions/presheaf.sig): Defines a presheaf, or more generally, a set-valued functor.
+- [`labeled-digraph.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/definitions/labeled-digraph.sig): Defines a labeled directed graph (essentially a category not equipped with identities or composition).
 
 #### Implementations of categories and groupoids
 
-- [`opposite-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/opposite-category.sml), [`opposite-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/opposite-groupoid.sml): The opposite category/groupoid.
-- [`product-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/product-category.sml), [`product-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/product-groupoid.sml): The product construction category/groupoid.
-- [`list-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/list-category.sml), [`list-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/list-groupoid.sml): The free finite product category/groupoid.
-- [`functor-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/functor-category.sml), [`functor-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/functor-groupoid.sml), [`functor-iso-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/functor-iso-groupoid.sml): Categories/groupoids of functors. Defines functors and natural transformations/isomorphisms, with component-wise identity, composition, and inversion of natural transformations/isomorphisms.
-- [`discrete-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/discrete-category.sml), [`discrete-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/discrete-groupoid.sml): The discrete category/groupoid on a type of objects.
-- [`category-into-labeled-digraph.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/category-into-labeled-digraph.sml), [`free-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/free-category.sml): The canonical embedding of categories into labeled digraphs, and the free category on a generating labeled digraph.
+- [`opposite-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/opposite-category.sml), [`opposite-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/opposite-groupoid.sml): The opposite category/groupoid.
+- [`product-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/product-category.sml), [`product-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/product-groupoid.sml): The product construction category/groupoid.
+- [`list-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/list-category.sml), [`list-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/list-groupoid.sml): The free finite product category/groupoid.
+- [`functor-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/functor-category.sml), [`functor-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/functor-groupoid.sml): Categories/groupoids of functors. Defines functors and natural transformations, with point-wise identity, composition, and inversion of natural transformations.
+- [`discrete-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/discrete-category.sml), [`discrete-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/discrete-groupoid.sml): The discrete category/groupoid on a type of objects.
+- [`category-into-labeled-digraph.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/category-into-labeled-digraph.sml), [`free-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/free-category.sml): The canonical embedding of categories into labeled digraphs, and the free category on a generating labeled digraph.
 
 #### Definitions of structures in categories
 
-- [`monoidal.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/monoidal.sml): Monoidal, symmetric monoidal, and cartesian categories.
-- [`pointed.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/pointed.sml): Initial, terminal, and zero objects.
+- [`monoidal.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/structures/monoidal.sml): Monoidal, symmetric monoidal, and cartesian categories.
+- [`pointed.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/structures/pointed.sml): Initial, terminal, and zero objects.
 
 #### Implementations of structures in categories
 
-- [`functor-composition.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/functor-composition.sml): Composition of functors and horizontal composite of natural transformations.
-- [`endofunctor-monoidal.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/endofunctor-monoidal.sml): The monoidal structure given by composition of endofunctors.
-- [`cartesian-into-terminal.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/cartesian-into-terminal.sml): The terminal structure on the unit of a cartesian category.
+- [`functor-composition.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/lemmas/functor-composition.sml): Composition of functors and horizontal composite of natural transformations.
+- [`endofunctor-monoidal.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/lemmas/endofunctor-monoidal.sml): The monoidal structure given by composition of endofunctors.
+- [`cartesian-into-terminal.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/lemmas/cartesian-into-terminal.sml): The terminal structure on the unit of a cartesian category.
 
 #### Applications in programming languages
 
-- [`term-language-template.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/programming-languages/term-language-template.sig), [`term-language.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/programming-languages/term-language.sig), [`make-term-language.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/programming-languages/make-term-language.sml): Defines a term language as a category of types, a cartesian category of contexts and substitutions, and a set-valued functor from contexts `ctx` and types `t` into sets of terms `tm[ctx, t]`. The variance is so that `tm[-, t]` is a presheaf on the context category, as usual. Additionally, provides the transformation from the minimal specification of a term language into its full categorical interface, which results in an implementation of the context and substitution category.
-- (TODO) [`lambda-calculus.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/src/programming-languages/lambda-calculus.sml): Implements the simply typed lambda calculus with products and primitive functions between base types as a term language. This includes a type checker for lambda terms, reduction-based $\beta\eta$-normalization, and the free cartesian closed category on the category of base types (a.k.a. the category with simple types as objects and closed lambda terms up to $\beta\eta$-equivalence as morphisms).
+- [`term-language-template.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/programming-languages/term-language-template.sig), [`term-language.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/programming-languages/term-language.sig), [`make-term-language.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/programming-languages/make-term-language.sml): Defines a term language as a category of types, a cartesian category of contexts and substitutions, and a set-valued functor from contexts `ctx` and types `t` into sets of terms `tm[ctx, t]`. The variance is so that `tm[-, t]` is a presheaf on the context category, as usual. Additionally, provides the transformation from the minimal specification of a term language into its full categorical interface, which results in an implementation of the context and substitution category.
+- (IN PROGRESS) [`lambda-calculus.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/programming-languages/lambda-calculus.sml): Implements the simply typed lambda calculus with products and primitive functions between base types as a term language. This includes a type checker for lambda terms, reduction-based $\beta\eta$-normalization, and the free cartesian closed category on the category of base types (a.k.a. the category with simple types as objects and closed lambda terms up to $\beta\eta$-equivalence as morphisms).
 
 ## Design Notes
 
