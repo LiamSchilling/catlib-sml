@@ -10,7 +10,7 @@ struct
   (* The only morphisms are the trivial identity morphisms. *)
   type morph = unit
 
-  datatype morpherror = UnequalObjects
+  datatype morpherror = ObjMismatch of obj * obj
   exception MorphType of morpherror
 
   fun objequiv (x, y) = T.equiv (x, y)
@@ -21,7 +21,7 @@ struct
     if T.equiv (x, y) then
       ()
     else
-      raise MorphType UnequalObjects
+      raise MorphType (ObjMismatch (x, y))
 
   fun id _ = ()
 

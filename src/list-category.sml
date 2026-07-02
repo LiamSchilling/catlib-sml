@@ -15,7 +15,7 @@ struct
     | objequiv (x :: X, y :: Y) =
       C.objequiv (x, y) andalso objequiv (X, Y)
     | objequiv (_, _) = raise MorphType IllFormed
-  
+
   fun morphequiv ([], []) = true
     | morphequiv (a :: A, b :: B) =
       C.morphequiv (a, b) andalso morphequiv (A, B)

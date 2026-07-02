@@ -24,9 +24,9 @@ sig
   val tmequiv : tm * tm -> bool
 
   (* Type checks a term in a context.
-     `check e (ctx, t)` should succeed when `e : tm[ctx, t]`,
+     `checktm e (ctx, t)` should succeed when `e : tm[ctx, t]`,
      and otherwise raise `TermType`. *)
-  val check : tm -> Ty.obj list * Ty.obj -> unit
+  val checktm : tm -> Ty.obj list * Ty.obj -> unit
 
   (* The variable introduction form.
   val var : forall i -> tm[ctx, ctx[i]] *)
@@ -35,6 +35,7 @@ sig
   (* Substitute all the variables in a term.
      Categorically, this is the restriction map
      for morphisms in the context category.
+     The behavior is undefined when the input terms are ill-typed.
   Equational laws:
     - functorial coherence with the identity and composition of substitutions
       (as defined in `MakeLanguageTemplate`)
@@ -44,6 +45,7 @@ sig
   val subst : tm list -> tm -> tm
 
   (* Map a term along a morphism in the type category.
+     The behavior is undefined when the inputs are ill-typed.
   Equational laws:
     - functorial coherence with the identity and composition of morphisms
     - point-wise composition of `apply` and `subst` commute

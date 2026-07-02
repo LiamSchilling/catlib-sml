@@ -2,6 +2,7 @@ Library
   signature CATEGORY
   signature GROUPOID
   signature PRESHEAF
+  signature LABELEDDIGRAPH
   functor OppositeCategory
   functor OppositeGroupoid
   functor ProductCategory
@@ -13,6 +14,8 @@ Library
   functor FunctorGroupoid
   functor DiscreteCategory
   functor DiscreteGroupoid
+  functor CategoryIntoLabeledDigraph
+  functor FreeCategory
   structure Monoidal
   functor MonoidalOf
   structure Pointed
@@ -27,6 +30,7 @@ is
   src/category.sig
   src/groupoid.sig
   src/presheaf.sig
+  src/labeled-digraph.sig
   src/opposite-category.sml
   src/opposite-groupoid.sml
   src/product-category.sml
@@ -37,6 +41,8 @@ is
   src/functor-groupoid.sml
   src/discrete-category.sml
   src/discrete-groupoid.sml
+  src/category-into-labeled-digraph.sml
+  src/free-category.sml
   src/monoidal.sml
   src/pointed.sml
   src/functor-composition.sml

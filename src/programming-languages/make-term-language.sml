@@ -23,7 +23,7 @@ struct
       | objequiv (t1 :: T1, t2 :: T2) =
         L.Ty.objequiv (t1, t2) andalso objequiv (T1, T2)
       | objequiv (_, _) = raise MorphType IllFormed
-  
+
     fun morphequiv ([], []) = true
       | morphequiv (e1 :: E1, e2 :: E2) =
         L.tmequiv (e1, e2) andalso morphequiv (E1, E2)
@@ -34,7 +34,7 @@ struct
        in the context of `ctx1`. *)
     fun checkFrom i [] (ctx1, []) = ()
       | checkFrom i (e :: sub) (ctx1, t :: ctx2) = (
-        L.check e (ctx1, t) handle L.TermType e =>
+        L.checktm e (ctx1, t) handle L.TermType e =>
           raise MorphType (ErrorAt (i, e));
         checkFrom (i + 1) sub (ctx1, ctx2) )
       | checkFrom i _ (_, _) = raise MorphType IllFormed
@@ -72,7 +72,7 @@ struct
     exception ElemType = L.TermType
 
     val equiv = L.tmequiv
-    val check = L.check
+    val check = L.checktm
     fun mapmorph (sub, f) = (L.apply f) o (L.subst sub)
   end
 

@@ -29,6 +29,7 @@ sig
   val check : t -> D.obj -> unit
 
   (* The action of the functor on a morphism.
+     The behavior is undefined when the inputs are ill-typed.
   Equational laws:
     - `mapmorph (id x)` is the identity function
     - `mapmorph (comp a b)` is the composition of `mapmorph a` and `mapmorph b`
