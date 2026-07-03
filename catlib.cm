@@ -1,40 +1,57 @@
 Library
+  structure Exceptions
+
+  signature SETOID
   signature CATEGORY
   signature GROUPOID
   signature PRESHEAF
   signature LABELEDDIGRAPH
+
+  structure UnitSetoid
   functor OppositeCategory
   functor OppositeGroupoid
+  functor ProductSetoid
   functor ProductCategory
   functor ProductGroupoid
+  functor ListSetoid
   functor ListCategory
   functor ListGroupoid
-  structure Funct
+  structure Functor
   functor FunctorCategory
   functor FunctorGroupoid
   functor DiscreteCategory
   functor DiscreteGroupoid
   functor CategoryIntoLabeledDigraph
   functor FreeCategory
+
   structure Monoidal
   functor MonoidalOf
   structure Pointed
   functor PointedOf
+
   functor FunctorComposition
   functor EndofunctorMonoidal
   functor CartesianIntoTerminal
+
   signature TERMLANGUAGETEMPLATE
   signature TERMLANGUAGE
   functor MakeTermLanguage
 is
+  data/exceptions.sml
+
+  core/definitions/setoid.sig
   core/definitions/category.sig
   core/definitions/groupoid.sig
   core/definitions/presheaf.sig
   core/definitions/labeled-digraph.sig
+
+  core/categories/unit-setoid.sml
   core/categories/opposite-category.sml
   core/categories/opposite-groupoid.sml
+  core/categories/product-setoid.sml
   core/categories/product-category.sml
   core/categories/product-groupoid.sml
+  core/categories/list-setoid.sml
   core/categories/list-category.sml
   core/categories/list-groupoid.sml
   core/categories/functor-category.sml
@@ -43,11 +60,14 @@ is
   core/categories/discrete-groupoid.sml
   core/categories/category-into-labeled-digraph.sml
   core/categories/free-category.sml
+
   core/structures/monoidal.sml
   core/structures/pointed.sml
+
   core/lemmas/functor-composition.sml
   core/lemmas/endofunctor-monoidal.sml
   core/lemmas/cartesian-into-terminal.sml
+
   programming-languages/term-language-template.sig
   programming-languages/term-language.sig
   programming-languages/make-term-language.sml

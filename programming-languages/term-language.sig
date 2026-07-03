@@ -12,21 +12,21 @@ sig
      - contravariant in the context category (first argument)
      - covariant in the type category (second argument) *)
   structure Tm : PRESHEAF
-    where type D.obj = Ctx.obj * Ty.obj
-    where type D.morph = Ctx.morph * Ty.morph
+    where type D.Obj.t = Ctx.Obj.t * Ty.Obj.t
+    where type D.Morph.t = Ctx.Morph.t * Ty.Morph.t
 
   (* Transport a type into a singleton context. *)
-  val intoCtx : Ty.obj -> Ctx.obj
+  val intoCtx : Ty.Obj.t -> Ctx.Obj.t
 
   (* Transport a term into a singleton substitution.
   val intoSubst : tm[ctx, t] -> Ctx.morph[ctx, intoCtx t] *)
-  val intoSubst : Tm.t -> Ctx.morph
+  val intoSubst : Tm.Elem.t -> Ctx.Morph.t
 
   (* The context category is cartesian. *)
-  val cartesian : (Ctx.obj, Ctx.morph) Monoidal.cartesian
+  val cartesian : (Ctx.Obj.t, Ctx.Morph.t) Monoidal.cartesian
 
   (* See `TERMLANGUAGETEMPLATE`. *)
-  val var : int -> Tm.t
-  val subst : Ctx.morph -> Tm.t -> Tm.t
-  val apply : Ty.morph -> Tm.t -> Tm.t
+  val var : int -> Tm.Elem.t
+  val subst : Ctx.Morph.t -> Tm.Elem.t -> Tm.Elem.t
+  val apply : Ty.Morph.t -> Tm.Elem.t -> Tm.Elem.t
 end

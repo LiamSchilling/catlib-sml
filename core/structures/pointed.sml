@@ -37,9 +37,9 @@ end
 (* The types of initial, terminal, and zero objects in a category `C`. *)
 functor PointedOf (C : CATEGORY) =
 struct
-  type initial = (C.obj, C.morph) Pointed.initial
-  type terminal = (C.obj, C.morph) Pointed.terminal
-  type zero = (C.obj, C.morph) Pointed.zero
+  type initial = (C.Obj.t, C.Morph.t) Pointed.initial
+  type terminal = (C.Obj.t, C.Morph.t) Pointed.terminal
+  type zero = (C.Obj.t, C.Morph.t) Pointed.zero
 
   (* A zero object is trivially an initial object. *)
   val zeroIntoInitial : zero -> initial = fn z => {

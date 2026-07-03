@@ -4,6 +4,6 @@ struct
   structure C = FunctorCategory(D)(G)
   open C
 
-  fun inv (n: morph) = {
+  fun inv (n: Morph.t) = {
     component = fn x => G.inv (#component n x) }
 end

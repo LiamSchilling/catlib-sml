@@ -9,33 +9,23 @@ struct
   structure Ctx =
   struct
     (* The objects are collections of types. *)
-    type obj = Ty.obj list
+    structure Obj = ListSetoid(Ty.Obj)
 
     (* The morphisms are substitutions,
        or implementations of one context in terms of another.
     type morph[ctx1, ctx2] = tm[ctx1, ctx2[0]] * ... tm[ctx1, ctx2[n]] *)
-    type morph = L.tm list
+    structure Morph = ListSetoid(L.Tm)
 
     datatype morpherror = IllFormed | ErrorAt of int * L.termerror
     exception MorphType of morpherror
-
-    fun objequiv ([], []) = true
-      | objequiv (t1 :: T1, t2 :: T2) =
-        L.Ty.objequiv (t1, t2) andalso objequiv (T1, T2)
-      | objequiv (_, _) = raise MorphType IllFormed
-
-    fun morphequiv ([], []) = true
-      | morphequiv (e1 :: E1, e2 :: E2) =
-        L.tmequiv (e1, e2) andalso morphequiv (E1, E2)
-      | morphequiv (_, _) = raise MorphType IllFormed
 
     (* Type checks a substitution `sub : morph[ctx1, ctx2]`
        by checking its terms against the types of `ctx2`
        in the context of `ctx1`. *)
     fun checkFrom i [] (ctx1, []) = ()
       | checkFrom i (e :: sub) (ctx1, t :: ctx2) = (
-        L.checktm e (ctx1, t) handle L.TermType e =>
-          raise MorphType (ErrorAt (i, e));
+        L.check e (ctx1, t) handle
+          L.TermType e => raise MorphType (ErrorAt (i, e));
         checkFrom (i + 1) sub (ctx1, ctx2) )
       | checkFrom i _ (_, _) = raise MorphType IllFormed
 
@@ -50,7 +40,7 @@ struct
       forall i ctx1 ->
       tm[ctx1 @ ctx2, ctx1[i]] * ... tm[ctx1 @ ctx2, ctx1[n+i]] *)
     fun idFrom i [] = []
-      | idFrom i ((_ : Ty.obj) :: ctx) = L.var i :: idFrom (i + 1) ctx
+      | idFrom i ((_ : Ty.Obj.t) :: ctx) = L.var i :: idFrom (i + 1) ctx
 
     val check = checkFrom 0
     val id = idFrom 0
@@ -66,13 +56,12 @@ struct
   struct
     structure D = ProductCategory(OppositeCategory(Ctx))(Ty)
 
-    type t = L.tm
+    structure Elem = L.Tm
 
     type elemerror = L.termerror
     exception ElemType = L.TermType
 
-    val equiv = L.tmequiv
-    val check = L.checktm
+    val check = L.check
     fun mapmorph (sub, f) = (L.apply f) o (L.subst sub)
   end
 
@@ -87,16 +76,15 @@ struct
   (* Because our design does not annotate substitutions (morphisms)
      with their source contexts (objects), it is impossible to express
      the action of context appendage on substitutions
-     given only references to the substitutions themselves. *)
-  exception UnimplementedUnexpressible
-
-  (* The context category is cartesian
+     given only references to the substitutions themselves.
+     -----------------------------------------------------------------
+     The context category is cartesian
      with the product operation given by context appendage. *)
   val cartesian : M.cartesian = {
     unit = [],
     product = {
       mapobj = fn (ctx1, ctx2) => ctx1 @ ctx2,
-      mapmorph = raise UnimplementedUnexpressible },
+      mapmorph = raise Exceptions.UnimplementedUnexpressible },
     leftproj = fn (ctx1, ctx2) => Ctx.idFrom 0 ctx1,
     rightproj = fn (ctx1, ctx2) => Ctx.idFrom (length ctx1) ctx2,
     pair = fn (sub1, sub2) => sub1 @ sub2 }

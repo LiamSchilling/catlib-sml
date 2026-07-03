@@ -8,5 +8,5 @@ sig
   Equational laws:
     - composition of inverses is the identity
   val inv : morph[x, y] -> morph[y, x] *)
-  val inv : morph -> morph
+  val inv : Morph.t -> Morph.t
 end

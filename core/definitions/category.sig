@@ -3,34 +3,20 @@
    with identity and composition of morphisms as defined below. *)
 signature CATEGORY =
 sig
-  type obj
-  type morph
+  structure Obj : SETOID
+  structure Morph : SETOID
 
   type morpherror
   exception MorphType of morpherror
 
-  (* The equivalence judgment on objects.
-     Equational laws should be up to, functions should cohere with,
-     and typing judgments should convert with respect to `objequiv`,
-     enabling sound quotient-style constructions. *)
-  val objequiv : obj * obj -> bool
-
-  (* The equivalence judgment on morphisms.
-     Equational laws should be up to, functions should cohere with,
-     and typing judgments should convert with respect to `morphequiv`,
-     enabling sound quotient-style constructions.
-     The behavior is undefined when the input morphisms are ill-typed.
-  val morphequiv : morph[x, y] * morph[x, y] -> bool *)
-  val morphequiv : morph * morph -> bool
-
   (* Type checks a morphism against its source and destination objects.
      `check a (x, y)` should succeed when `a : morph[x, y]`,
      and otherwise raise `MorphType`. *)
-  val check : morph -> obj * obj -> unit
+  val check : Morph.t -> Obj.t * Obj.t -> unit
 
   (* The identity morphism for an object.
   val id : forall x -> morph[x, x] *)
-  val id : obj -> morph
+  val id : Obj.t -> Morph.t
 
   (* Composition of morphisms.
      The behavior is undefined when the input morphisms are ill-typed.
@@ -38,5 +24,5 @@ sig
     - associativity
     - the identity is unit
   val comp : morph[y, z] * morph[x, y] -> morph[x, z] *)
-  val comp : morph * morph -> morph
+  val comp : Morph.t * Morph.t -> Morph.t
 end

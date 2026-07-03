@@ -1,4 +1,4 @@
-structure Funct =
+structure Functor =
 struct
   (* The objects are functors.
   Equational laws:
@@ -23,21 +23,28 @@ end
 (* The category of functors between categories `C, D`. *)
 functor FunctorCategory (C : CATEGORY) (D : CATEGORY) : CATEGORY =
 struct
-  type obj = (C.obj, C.morph, D.obj, D.morph) Funct.funct
-  type morph = (C.obj, D.morph) Funct.nattrans
+  structure Obj =
+  struct
+    type t = (C.Obj.t, C.Morph.t, D.Obj.t, D.Morph.t) Functor.funct
 
-  datatype morpherror = UnimplementedUndecidable
+    fun eq (f, g) = raise Exceptions.UnimplementedUnexpressible
+  end
+
+  structure Morph =
+  struct
+    type t = (C.Obj.t, D.Morph.t) Functor.nattrans
+
+    fun eq (n, m) = raise Exceptions.UnimplementedUnexpressible
+  end
+
+  type morpherror = unit
   exception MorphType of morpherror
 
-  fun objequiv (f, g) = raise MorphType UnimplementedUndecidable
+  fun check n (f, g) = raise Exceptions.UnimplementedUnexpressible
 
-  fun morphequiv (n, m) = raise MorphType UnimplementedUndecidable
-
-  fun check n (f, g) = raise MorphType UnimplementedUndecidable
-
-  fun id (f: obj) = {
+  fun id (f: Obj.t) = {
     component = fn x => D.id (#mapobj f x) }
 
-  fun comp (n: morph, m: morph) = {
+  fun comp (n: Morph.t, m: Morph.t) = {
     component = fn x => D.comp (#component n x, #component m x) }
 end

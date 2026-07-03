@@ -14,16 +14,15 @@ struct
      with their source and destination functors (objects),
      it is impossible to express the horizontal composite of
      (a.k.a. the action of functor composition on) natural transformations
-     given only references to the transformations themselves. *)
-  exception UnimplementedUnexpressible
-
-  (* The composition of functors,
+     given only references to the transformations themselves.
+     -----------------------------------------------------------------
+     The composition of functors,
      as a bifunctor on the categories of functors. *)
-  val comp : B.obj = {
+  val comp : B.Obj.t = {
       mapobj = fn (f, g) => {
         mapobj = (#mapobj f) o (#mapobj g),
         mapmorph = (#mapmorph f) o (#mapmorph g) },
-      mapmorph = fn (n, m) => raise UnimplementedUnexpressible }
+      mapmorph = fn (n, m) => raise Exceptions.UnimplementedUnexpressible }
 
   (* The horizontal composite of natural transformations `n, m`,
      given the source functor of `n` and the destination functor of `m`.
@@ -31,7 +30,7 @@ struct
       forall (f, g') -> nattrans[f, f'] * nattrans[g, g'] ->
       nattrans[#mapobj comp (f, g), #mapobj comp (f', g')] *)
   val horizontalCompOfDestAndSrc :
-      DtoE.obj * CtoD.obj -> DtoE.morph * CtoD.morph -> CtoE.morph =
+      DtoE.Obj.t * CtoD.Obj.t -> DtoE.Morph.t * CtoD.Morph.t -> CtoE.Morph.t =
     fn (f, g) => fn (n, m) => {
       component = fn x =>
         E.comp (#component n (#mapobj g x), #mapmorph f (#component m x)) }
@@ -42,7 +41,7 @@ struct
       forall (f', g) -> nattrans[f, f'] * nattrans[g, g'] ->
       nattrans[#mapobj comp (f, g), #mapobj comp (f', g')] *)
   val horizontalCompOfDestAndSrc :
-      DtoE.obj * CtoD.obj -> DtoE.morph * CtoD.morph -> CtoE.morph =
+      DtoE.Obj.t * CtoD.Obj.t -> DtoE.Morph.t * CtoD.Morph.t -> CtoE.Morph.t =
     fn (f, g) => fn (n, m) => {
       component = fn x =>
         E.comp (#mapmorph f (#component m x), #component n (#mapobj g x)) }

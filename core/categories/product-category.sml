@@ -2,26 +2,20 @@
 functor ProductCategory (C : CATEGORY) (D : CATEGORY) : CATEGORY =
 struct
   (* The objects of the product category are pairs. *)
-  type obj = C.obj * D.obj
+  structure Obj = ProductSetoid(C.Obj)(D.Obj)
 
   (* The product morphisms are also pairs.
   type morph[(x, y), (z, w)] = morph[x, z] * morph[y, w] *)
-  type morph = C.morph * D.morph
+  structure Morph = ProductSetoid(C.Morph)(D.Morph)
 
   datatype morpherror = LeftError of C.morpherror | RightError of D.morpherror
   exception MorphType of morpherror
 
-  fun objequiv ((x, y), (z, w)) =
-    C.objequiv (x, z) andalso D.objequiv (y, w)
-
-  fun morphequiv ((a, b), (c, d)) =
-    C.morphequiv (a, c) andalso D.morphequiv (b, d)
-
   fun check (a, b) ((x, y), (z, w)) = (
-    C.check a (x, z) handle C.MorphType e =>
-      raise MorphType (LeftError e);
-    D.check b (y, w) handle D.MorphType e =>
-      raise MorphType (RightError e) )
+    C.check a (x, z) handle
+      C.MorphType e => raise MorphType (LeftError e);
+    D.check b (y, w) handle
+      D.MorphType e => raise MorphType (RightError e) )
 
   fun id (x, y) = (C.id x, D.id y)
 

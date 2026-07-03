@@ -1,10 +1,7 @@
-(* The discrete groupoid on a type of objects. *)
-functor DiscreteGroupoid (T : sig
-  type t
-  val equiv : t * t -> bool
-end) : CATEGORY =
+(* The discrete groupoid on a generating set of objects. *)
+functor DiscreteGroupoid (S : SETOID) : CATEGORY =
 struct
-  structure C = DiscreteCategory(T)
+  structure C = DiscreteCategory(S)
   open C
 
   fun inv () = ()

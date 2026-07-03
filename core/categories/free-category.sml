@@ -2,30 +2,26 @@
 functor FreeCategory (G : LABELEDDIGRAPH) : CATEGORY =
 struct
   (* The objects of the category are the nodes of the graph. *)
-  type obj = G.node
+  structure Obj = G.Node
 
   (* The morphisms are the reflecive and transitive closure
      of the edges of the graph.
   datatype morph =
       Nil : morph[x, x]
     | Cons : (z : G.node) * G.edge[z, y] * morph[x, z] -> morph[x, y] *)
-  type morph = (G.node * G.edge) list
+  structure Morph = ListSetoid(ProductSetoid(G.Node)(G.Edge))
 
-  datatype morpherror = ObjMismatch of obj * obj | ErrorAt of int * G.edgeerror
+  datatype morpherror =
+      ObjMismatch of Obj.t * Obj.t
+    | ErrorAt of int * G.edgeerror
+
   exception MorphType of morpherror
 
-  fun objequiv (x, y) = G.nodeequiv (x, y)
-
-  fun morphequiv ([], []) = true
-    | morphequiv ((x, a) :: A, (y, b) :: B) =
-      G.nodeequiv (x, y) andalso G.edgeequiv (a, b) andalso morphequiv (A, B)
-    | morphequiv (_, _) = false
-
   fun checkFrom i [] (x, y) =
-      if G.nodeequiv (x, y) then () else raise MorphType (ObjMismatch (x, y))
+      if Obj.eq (x, y) then () else raise MorphType (ObjMismatch (x, y))
     | checkFrom i ((z, a) :: A) (x, y) = (
-      G.check a (z, y) handle G.EdgeType e =>
-        raise MorphType (ErrorAt (i, e));
+      G.check a (z, y) handle
+        G.EdgeType e => raise MorphType (ErrorAt (i, e));
       checkFrom (i + 1) A (x, z) )
 
   val check = checkFrom 0
