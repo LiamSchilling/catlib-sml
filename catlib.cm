@@ -42,8 +42,8 @@ is
   core/definitions/setoid.sig
   core/definitions/category.sig
   core/definitions/groupoid.sig
-  core/definitions/presheaf.sig
   core/definitions/labeled-digraph.sig
+  core/definitions/presheaf.sig
 
   core/categories/unit-setoid.sml
   core/categories/opposite-category.sml
