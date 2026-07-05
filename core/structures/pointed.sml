@@ -42,12 +42,12 @@ struct
   type zero = (C.Obj.t, C.Morph.t) Pointed.zero
 
   (* A zero object is trivially an initial object. *)
-  val zeroIntoInitial : zero -> initial = fn z => {
+  fun zeroIntoInitial (z: zero) : initial =  {
     obj = #obj z,
     from = #from z }
 
   (* A zero object is trivially a terminal object. *)
-  val zeroIntoTerminal : zero -> terminal = fn z => {
+  fun zeroIntoTerminal (z: zero) : terminal = {
     obj = #obj z,
     to = #to z }
 end

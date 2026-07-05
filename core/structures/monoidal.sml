@@ -62,14 +62,12 @@ struct
   type cartesian = (C.Obj.t, C.Morph.t) Monoidal.cartesian
 
   (* A symmetric monoidal category is trivially a monoidal category. *)
-  val symmetricMonoidalIntoMonoidal :
-      symmetricmonoidal -> monoidal = fn s => {
+  fun symmetricMonoidalIntoMonoidal (s: symmetricmonoidal) : monoidal = {
     unit = #unit s,
     tensor = #tensor s }
 
   (* A cartesian category is trivially a symmetric monoidal category. *)
-  val cartesianIntoSymmetricMonoidal :
-      cartesian -> symmetricmonoidal = fn c => {
+  fun cartesianIntoSymmetricMonoidal (c: cartesian) : symmetricmonoidal = {
     unit = #unit c,
     tensor = #product c,
     swapmap = {

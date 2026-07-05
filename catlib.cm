@@ -2,6 +2,7 @@ Library
   structure Exceptions
   signature STREAM
   signature STREAMMONOID
+  functor StreamUtil
 
   signature SETOID
   signature CATEGORY
@@ -36,6 +37,10 @@ Library
   functor EndofunctorMonoidal
   functor CartesianIntoTerminal
 
+  structure ReductionGraph
+  functor ReductionGraphOf
+  functor IterateReductionGraph
+
   signature TERMLANGUAGETEMPLATE
   signature TERMLANGUAGE
   functor MakeTermLanguage
@@ -43,6 +48,7 @@ is
   data/exceptions.sml
   data/stream.sig
   data/stream-monoid.sig
+  data/stream-util.sml
 
   core/definitions/setoid.sig
   core/definitions/category.sig
@@ -73,6 +79,9 @@ is
   core/lemmas/functor-composition.sml
   core/lemmas/endofunctor-monoidal.sml
   core/lemmas/cartesian-into-terminal.sml
+
+  rewriting-systems/reduction-graph.sml
+  rewriting-systems/iterate-reduction-graph.sml
 
   programming-languages/term-language-template.sig
   programming-languages/term-language.sig

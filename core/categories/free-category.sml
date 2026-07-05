@@ -1,4 +1,4 @@
-(* The free category on a generating labeled di-graph. *)
+(* The free category on a generating labeled di-graph `G`. *)
 functor FreeCategory
   (G : LABELEDDIGRAPH)
   (Stream : STREAMMONOID where type elem = G.Edge.t * G.Node.t)

@@ -29,20 +29,22 @@ struct
   val horizontalCompOfSrcAndDest :
       forall (f, g') -> nattrans[f, f'] * nattrans[g, g'] ->
       nattrans[#mapobj comp (f, g), #mapobj comp (f', g')] *)
-  val horizontalCompOfDestAndSrc :
-      DtoE.Obj.t * CtoD.Obj.t -> DtoE.Morph.t * CtoD.Morph.t -> CtoE.Morph.t =
-    fn (f, g) => fn (n, m) => {
-      component = fn x =>
-        E.comp (#component n (#mapobj g x), #mapmorph f (#component m x)) }
+  fun horizontalCompOfDestAndSrc
+      (f: DtoE.Obj.t, g: CtoD.Obj.t)
+      (n: DtoE.Morph.t, m: CtoD.Morph.t)
+      : CtoE.Morph.t = {
+    component = fn x =>
+      E.comp (#component n (#mapobj g x), #mapmorph f (#component m x)) }
 
   (* The horizontal composite of natural transformations `n, m`,
      given the destination functor of `n` and the source functor of `m`.
   val horizontalCompOfDestAndSrc :
       forall (f', g) -> nattrans[f, f'] * nattrans[g, g'] ->
       nattrans[#mapobj comp (f, g), #mapobj comp (f', g')] *)
-  val horizontalCompOfDestAndSrc :
-      DtoE.Obj.t * CtoD.Obj.t -> DtoE.Morph.t * CtoD.Morph.t -> CtoE.Morph.t =
-    fn (f, g) => fn (n, m) => {
-      component = fn x =>
-        E.comp (#mapmorph f (#component m x), #component n (#mapobj g x)) }
+  fun horizontalCompOfDestAndSrc
+      (f: DtoE.Obj.t, g: CtoD.Obj.t)
+      (n: DtoE.Morph.t, m: CtoD.Morph.t)
+      : CtoE.Morph.t = {
+    component = fn x =>
+      E.comp (#mapmorph f (#component m x), #component n (#mapobj g x)) }
 end

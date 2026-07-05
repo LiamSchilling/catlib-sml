@@ -33,6 +33,11 @@ A development of categorical structures and their transformations, with applicat
 - [`endofunctor-monoidal.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/lemmas/endofunctor-monoidal.sml): The monoidal structure given by composition of endofunctors.
 - [`cartesian-into-terminal.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/lemmas/cartesian-into-terminal.sml): The terminal structure on the unit of a cartesian category.
 
+#### Applications in rewriting systems
+
+- [`reduction-graph.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/rewriting-systems/reduction-graph.sml): Defines an adequate reduction graph as a stepping function that either finds a non-trivial rewrite on a form, or signals that the form is normal.
+- [`iterate-reduction-graph.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/rewriting-systems/iterate-reduction-graph.sml): Implements the lift from a reduction graph that finds individual rewrites (edges in a labeled directed graph `G`) into a reduction graph that finds full normalization paths (morphisms in the free category on `G`).
+
 #### Applications in programming languages
 
 - [`term-language-template.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/programming-languages/term-language-template.sig), [`term-language.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/programming-languages/term-language.sig), [`make-term-language.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/programming-languages/make-term-language.sml): Defines a term language as a category of types, a cartesian category of contexts and substitutions, and a set-valued functor from contexts `ctx` and types `t` into sets of terms `tm[ctx, t]`. The variance is so that `tm[-, t]` is a presheaf on the context category, as usual. Additionally, provides the transformation from the minimal specification of a term language into its full categorical interface, which results in an implementation of the context and substitution category.
