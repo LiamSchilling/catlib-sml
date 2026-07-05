@@ -1,6 +1,6 @@
 (* From a minimal specification of a term language,
    construct a robust term language interface. *)
-functor MakeTermLanguage (L : TERMLANGUAGETEMPLATE) : TERMLANGUAGE =
+functor MakeTermLanguage (L : TERMLANGUAGETEMPLATE) :> TERMLANGUAGE =
 struct
   (* The category of types. *)
   structure Ty = L.Ty
