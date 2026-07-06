@@ -1,20 +1,19 @@
 (* The free category on a generating labeled di-graph `G`. *)
-functor FreeCategory
-  (G : LABELEDDIGRAPH)
-  (Stream : STREAMMONOID where type elem = G.Edge.t * G.Node.t)
-  : CATEGORY =
+functor FreeCategory (G : LABELEDDIGRAPH) : CATEGORY =
 struct
+  open LazyList
+
   (* The objects of the category are the nodes of the graph. *)
   structure Obj = G.Node
 
   (* The morphisms are the reflecive and transitive closure
      of the edges of the graph, a.k.a. finite sequences of edges.
-     A stream representation is preferred to explicit lists
+     The lazy representation is preferred to explicit lists
      to reduce the space overhead of long edge lists.
-  type morph[x, y] =
-    (G.edge[x, z] * (z : G.node)) * (G.edge[z, w] * (w : G.node)) * ...
-    (G.edge[u, v] * (v : G.node)) * (G.edge[v, y] * (y : G.node)) *)
-  structure Morph = StreamSetoid(ProductSetoid(G.Edge)(G.Node))(Stream)
+  datatype morph =
+      Nil : morph[x, x]
+    | Cons : (G.edge[x, y] * (y : G.node)) * morph[y, z] -> morph[x, z] *)
+  structure Morph = LazyListSetoid(ProductSetoid(G.Edge)(G.Node))
 
   datatype morpherror =
       ObjMismatch of Obj.t * Obj.t
@@ -22,21 +21,19 @@ struct
 
   exception MorphType of morpherror
 
-  fun checkFrom i A (x, y) =
-    case Stream.step A of
-      NONE => (
+  fun checkFrom i Nil (x, y) = (
       if Obj.eq (x, y) then
         ()
       else
         raise MorphType (ObjMismatch (x, y)) )
-    | SOME ((a, z), A') => (
-      G.check a (x, z) handle
+    | checkFrom i (Cons ((a, y), f)) (x, z) = (
+      G.check a (x, y) handle
         G.EdgeType e => raise MorphType (ErrorAt (i, e));
-      checkFrom (i + 1) A (z, y) )
+      checkFrom (i + 1) (f ()) (y, z) )
 
   val check = checkFrom 0
 
-  fun id x = Stream.empty
+  fun id x = Nil
 
-  fun comp (A, B) = Stream.append (A, B)
+  fun comp (A, B) = append (A, B)
 end

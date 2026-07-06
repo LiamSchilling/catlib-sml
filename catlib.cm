@@ -1,8 +1,6 @@
 Library
   structure Exceptions
-  signature STREAM
-  signature STREAMMONOID
-  functor StreamUtil
+  structure LazyList
 
   signature SETOID
   signature CATEGORY
@@ -11,7 +9,7 @@ Library
   signature LABELEDDIGRAPH
 
   structure UnitSetoid
-  functor StreamSetoid
+  functor LazyListSetoid
   functor OppositeCategory
   functor OppositeGroupoid
   functor ProductSetoid
@@ -46,9 +44,7 @@ Library
   functor MakeTermLanguage
 is
   data/exceptions.sml
-  data/stream.sig
-  data/stream-monoid.sig
-  data/stream-util.sml
+  data/lazy-list.sml
 
   core/definitions/setoid.sig
   core/definitions/category.sig
@@ -57,7 +53,7 @@ is
   core/definitions/presheaf.sig
 
   core/categories/unit-setoid.sml
-  core/categories/stream-setoid.sml
+  core/categories/lazy-list-setoid.sml
   core/categories/opposite-category.sml
   core/categories/opposite-groupoid.sml
   core/categories/product-setoid.sml
