@@ -8,7 +8,7 @@ struct
   structure CtoE = FunctorCategory(C)(E)
 
   (* A reference to the relevant category of bifunctors *)
-  structure B = FunctorCategory(ProductCategory(DtoE)(CtoD))(CtoE)
+  structure Bifunctor = FunctorCategory(ProductCategory(DtoE)(CtoD))(CtoE)
 
   (* Because our design does not annotate natural transformations (morphisms)
      with their source and destination functors (objects),
@@ -18,7 +18,7 @@ struct
      -----------------------------------------------------------------
      The composition of functors,
      as a bifunctor on the categories of functors. *)
-  val comp : B.Obj.t = {
+  val comp : Bifunctor.Obj.t = {
       mapobj = fn (f, g) => {
         mapobj = (#mapobj f) o (#mapobj g),
         mapmorph = (#mapmorph f) o (#mapmorph g) },

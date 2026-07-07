@@ -7,6 +7,7 @@ Library
   signature GROUPOID
   signature PRESHEAF
   signature LABELEDDIGRAPH
+  signature MONOID
 
   structure UnitSetoid
   functor LazyListSetoid
@@ -49,8 +50,9 @@ is
   core/definitions/setoid.sig
   core/definitions/category.sig
   core/definitions/groupoid.sig
-  core/definitions/labeled-digraph.sig
   core/definitions/presheaf.sig
+  core/definitions/labeled-digraph.sig
+  core/definitions/monoid.sig
 
   core/categories/unit-setoid.sml
   core/categories/lazy-list-setoid.sml

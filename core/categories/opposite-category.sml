@@ -17,4 +17,6 @@ struct
   fun id x = C.id x
 
   fun comp (a, b) = C.comp (b, a)
+
+  fun isid a = C.isid a
 end

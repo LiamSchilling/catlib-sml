@@ -21,11 +21,8 @@ struct
 
   exception MorphType of morpherror
 
-  fun checkFrom i Nil (x, y) = (
-      if Obj.eq (x, y) then
-        ()
-      else
-        raise MorphType (ObjMismatch (x, y)) )
+  fun checkFrom i Nil (x, y) =
+      Exceptions.assert Obj.eq (MorphType o ObjMismatch) (x, y)
     | checkFrom i (Cons ((a, y), f)) (x, z) = (
       G.check a (x, y) handle
         G.EdgeType e => raise MorphType (ErrorAt (i, e));
@@ -36,4 +33,7 @@ struct
   fun id x = Nil
 
   fun comp (A, B) = append (A, B)
+
+  fun isid Nil = true
+    | isid (Cons (_, _)) = false
 end

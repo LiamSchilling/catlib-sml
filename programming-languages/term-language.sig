@@ -7,13 +7,13 @@ sig
   structure Ctx : CATEGORY
 
   (* The term language `tm[-, -]` is given by a set-valued functor
-     whose domain `Tm.D` is `ProductCategory(OppositeCategory(Ctx))(Ty)`.
+     whose domain `Tm.Dom` is `ProductCategory(OppositeCategory(Ctx))(Ty)`.
      That is, `tm[-, -]` is:
      - contravariant in the context category (first argument)
      - covariant in the type category (second argument) *)
   structure Tm : PRESHEAF
-    where type D.Obj.t = Ctx.Obj.t * Ty.Obj.t
-    where type D.Morph.t = Ctx.Morph.t * Ty.Morph.t
+    where type Dom.Obj.t = Ctx.Obj.t * Ty.Obj.t
+    where type Dom.Morph.t = Ctx.Morph.t * Ty.Morph.t
 
   (* Transport a type into a singleton context. *)
   val intoCtx : Ty.Obj.t -> Ctx.Obj.t

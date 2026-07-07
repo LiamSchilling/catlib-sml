@@ -9,6 +9,7 @@ A development of categorical structures and their transformations, with applicat
 - [`category.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/definitions/category.sig): Defines a category.
 - [`groupoid.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/definitions/groupoid.sig): Defines a groupoid.
 - [`labeled-digraph.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/definitions/labeled-digraph.sig): Defines a labeled directed graph (essentially a category not equipped with identities or composition).
+- [`monoid.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/definitions/monoid.sig): Defines a monoid.
 - [`setoid.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/definitions/setoid.sig): Defines a setoid as a type equipped with an equivalence relation.
 - [`presheaf.sig`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/definitions/presheaf.sig): Defines a presheaf, or more generally, a set-valued functor.
 

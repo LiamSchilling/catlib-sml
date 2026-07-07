@@ -16,7 +16,10 @@ struct
     type morph[ctx1, ctx2] = tm[ctx1, ctx2[0]] * ... tm[ctx1, ctx2[n]] *)
     structure Morph = ListSetoid(L.Tm)
 
-    datatype morpherror = IllFormed | ErrorAt of int * L.termerror
+    datatype morpherror =
+        IllFormed of Morph.t * Obj.t * Obj.t
+      | ErrorAt of int * L.termerror
+
     exception MorphType of morpherror
 
     (* Type checks a substitution `sub : morph[ctx1, ctx2]`
@@ -27,7 +30,8 @@ struct
         L.check e (ctx1, t) handle
           L.TermType e => raise MorphType (ErrorAt (i, e));
         checkFrom (i + 1) sub (ctx1, ctx2) )
-      | checkFrom i _ (_, _) = raise MorphType IllFormed
+      | checkFrom i sub (ctx1, ctx2) =
+        raise MorphType (IllFormed (sub, ctx1, ctx2))
 
     (* `idFrom 0` constructs the identity substitution,
        a list of self-indexed bound variables.
@@ -42,8 +46,15 @@ struct
     fun idFrom i [] = []
       | idFrom i ((_ : Ty.Obj.t) :: ctx) = L.var i :: idFrom (i + 1) ctx
 
+    (* `isidFrom 0` checks whether a substitution
+        is equivalent to an identity substitution. *)
+    fun isidFrom i [] = true
+      | isidFrom i (e :: sub) =
+        L.Tm.eq (e, L.var i) andalso isidFrom (i + 1) sub
+
     val check = checkFrom 0
     val id = idFrom 0
+    val isid = isidFrom 0
 
     (* Composes substitutions `sub1` and `sub2`
        by mapping the terms of `sub1` along `sub2`. *)
@@ -54,7 +65,7 @@ struct
   (* The set-valued functor that gives the terms. *)
   structure Tm =
   struct
-    structure D = ProductCategory(OppositeCategory(Ctx))(Ty)
+    structure Dom = ProductCategory(OppositeCategory(Ctx))(Ty)
 
     structure Elem = L.Tm
 
@@ -84,7 +95,7 @@ struct
     unit = [],
     product = {
       mapobj = fn (ctx1, ctx2) => ctx1 @ ctx2,
-      mapmorph = raise Exceptions.UnimplementedUnexpressible },
+      mapmorph = fn (_, _) => raise Exceptions.UnimplementedUnexpressible },
     leftproj = fn (ctx1, ctx2) => Ctx.idFrom 0 ctx1,
     rightproj = fn (ctx1, ctx2) => Ctx.idFrom (length ctx1) ctx2,
     pair = fn (sub1, sub2) => sub1 @ sub2 }

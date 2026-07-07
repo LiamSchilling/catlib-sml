@@ -47,4 +47,6 @@ struct
 
   fun comp (n: Morph.t, m: Morph.t) = {
     component = fn x => D.comp (#component n x, #component m x) }
+
+  fun isid f = raise Exceptions.UnimplementedUnexpressible
 end

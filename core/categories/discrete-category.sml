@@ -7,16 +7,17 @@ struct
   (* The only morphisms are the trivial identity morphisms. *)
   structure Morph = UnitSetoid
 
-  datatype morpherror = ObjMismatch of Obj.t * Obj.t
+  datatype morpherror =
+    ObjMismatch of Obj.t * Obj.t
+
   exception MorphType of morpherror
 
   fun check () (x, y) =
-    if Obj.eq (x, y) then
-      ()
-    else
-      raise MorphType (ObjMismatch (x, y))
+    Exceptions.assert Obj.eq (MorphType o ObjMismatch) (x, y)
 
   fun id _ = ()
 
   fun comp ((), ()) = ()
+
+  fun isid () = true
 end

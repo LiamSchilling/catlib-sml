@@ -8,7 +8,10 @@ struct
   type morph[(x, y), (z, w)] = morph[x, z] * morph[y, w] *)
   structure Morph = ProductSetoid(C.Morph)(D.Morph)
 
-  datatype morpherror = LeftError of C.morpherror | RightError of D.morpherror
+  datatype morpherror =
+      LeftError of C.morpherror
+    | RightError of D.morpherror
+
   exception MorphType of morpherror
 
   fun check (a, b) ((x, y), (z, w)) = (
@@ -20,4 +23,6 @@ struct
   fun id (x, y) = (C.id x, D.id y)
 
   fun comp ((a, b), (c, d)) = (C.comp (a, c), D.comp (b, d))
+
+  fun isid (a, b) = C.isid a andalso D.isid b
 end

@@ -3,13 +3,13 @@
 functor EndofunctorMonoidal (C : CATEGORY) =
 struct
   (* A reference to the types of monoidal structures. *)
-  structure M = MonoidalOf(FunctorCategory(C)(C))
+  structure Monoidal = MonoidalOf(FunctorCategory(C)(C))
 
   (* A reference to the implementation of functor composition. *)
   structure Comp = FunctorComposition(C)(C)(C)
 
   (* The monoidal structure on the category of endofunctors. *)
-  val endofunctorMonoidal : M.monoidal = {
+  val endofunctorMonoidal : Monoidal.monoidal = {
     unit = {
       mapobj = fn x => x,
       mapmorph = fn a => a },

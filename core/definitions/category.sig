@@ -25,4 +25,7 @@ sig
     - the identity is unit
   val comp : morph[y, z] * morph[x, y] -> morph[x, z] *)
   val comp : Morph.t * Morph.t -> Morph.t
+
+  (* Checks whether a morphism is the identity for some object. *)
+  val isid : Morph.t -> bool
 end
