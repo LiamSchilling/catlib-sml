@@ -15,13 +15,12 @@ A development of categorical structures and their transformations, with applicat
 
 #### Implementations of categories and groupoids
 
-- [`unit-setoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/unit-setoid.sml): The singleton setoid.
 - [`opposite-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/opposite-category.sml), [`opposite-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/opposite-groupoid.sml): The opposite category/groupoid.
 - [`product-setoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/product-setoid.sml), [`product-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/product-category.sml), [`product-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/product-groupoid.sml): The product construction setoid/category/groupoid.
 - [`list-setoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/list-setoid.sml), [`list-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/list-category.sml), [`list-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/list-groupoid.sml): The free finite product setoid/category/groupoid.
 - [`functor-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/functor-category.sml), [`functor-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/functor-groupoid.sml): Categories/groupoids of functors. Defines functors and natural transformations, with point-wise identity, composition, and inversion of natural transformations.
 - [`discrete-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/discrete-category.sml), [`discrete-groupoid.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/discrete-groupoid.sml): The discrete category/groupoid on a type of objects.
-- [`category-into-labeled-digraph.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/category-into-labeled-digraph.sml), [`free-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/free-category.sml): The canonical embedding of categories into labeled digraphs, and the free category on a generating labeled digraph.
+- [`free-category.sml`](https://github.com/LiamSchilling/catlib-sml/blob/main/core/categories/free-category.sml): The free category on a generating labeled digraph.
 
 #### Definitions of structures in categories
 

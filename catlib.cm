@@ -1,15 +1,15 @@
 Library
-  structure Exceptions
+  structure Exception
   structure LazyList
 
   signature SETOID
+  signature MONOID
+  signature LABELEDDIGRAPH
   signature CATEGORY
   signature GROUPOID
   signature PRESHEAF
-  signature LABELEDDIGRAPH
-  signature MONOID
 
-  structure UnitSetoid
+  functor StrictSetoid
   functor LazyListSetoid
   functor OppositeCategory
   functor OppositeGroupoid
@@ -24,8 +24,9 @@ Library
   functor FunctorGroupoid
   functor DiscreteCategory
   functor DiscreteGroupoid
-  functor CategoryIntoLabeledDigraph
   functor FreeCategory
+  functor CategoryIntoMonoid
+  functor CategoryIntoLabeledDigraph
 
   structure Monoidal
   functor MonoidalOf
@@ -43,18 +44,23 @@ Library
   signature TERMLANGUAGETEMPLATE
   signature TERMLANGUAGE
   functor MakeTermLanguage
+
+  structure LambdaCalculus
+  functor LambdaCalculusGraph
+  functor LambdaCalculusCategory
+  functor LambdaCalculusReducer
 is
-  data/exceptions.sml
+  data/exception.sml
   data/lazy-list.sml
 
   core/definitions/setoid.sig
+  core/definitions/monoid.sig
+  core/definitions/labeled-digraph.sig
   core/definitions/category.sig
   core/definitions/groupoid.sig
   core/definitions/presheaf.sig
-  core/definitions/labeled-digraph.sig
-  core/definitions/monoid.sig
 
-  core/categories/unit-setoid.sml
+  core/categories/strict-setoid.sml
   core/categories/lazy-list-setoid.sml
   core/categories/opposite-category.sml
   core/categories/opposite-groupoid.sml
@@ -68,8 +74,9 @@ is
   core/categories/functor-groupoid.sml
   core/categories/discrete-category.sml
   core/categories/discrete-groupoid.sml
-  core/categories/category-into-labeled-digraph.sml
   core/categories/free-category.sml
+  core/categories/category-into-monoid.sml
+  core/categories/category-into-labeled-digraph.sml
 
   core/structures/monoidal.sml
   core/structures/pointed.sml
@@ -78,9 +85,12 @@ is
   core/lemmas/endofunctor-monoidal.sml
   core/lemmas/cartesian-into-terminal.sml
 
-  rewriting-systems/reduction-graph.sml
-  rewriting-systems/iterate-reduction-graph.sml
+  domains/rewriting-systems/reduction-graph.sml
+  domains/rewriting-systems/iterate-reduction-graph.sml
 
-  programming-languages/term-language-template.sig
-  programming-languages/term-language.sig
-  programming-languages/make-term-language.sml
+  domains/programming-languages/term-language-template.sig
+  domains/programming-languages/term-language.sig
+  domains/programming-languages/make-term-language.sml
+
+  case-studies/lambda-calculus/untyped.sml
+  case-studies/lambda-calculus/reducer.sml

@@ -22,7 +22,7 @@ struct
   exception MorphType of morpherror
 
   fun checkFrom i Nil (x, y) =
-      Exceptions.assert Obj.eq (MorphType o ObjMismatch) (x, y)
+      Exception.assert Obj.eq (MorphType o ObjMismatch) (x, y)
     | checkFrom i (Cons ((a, y), f)) (x, z) = (
       G.check a (x, y) handle
         G.EdgeType e => raise MorphType (ErrorAt (i, e));

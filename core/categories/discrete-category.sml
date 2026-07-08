@@ -5,7 +5,7 @@ struct
   structure Obj = S
 
   (* The only morphisms are the trivial identity morphisms. *)
-  structure Morph = UnitSetoid
+  structure Morph = StrictSetoid(struct type t = unit end)
 
   datatype morpherror =
     ObjMismatch of Obj.t * Obj.t
@@ -13,7 +13,7 @@ struct
   exception MorphType of morpherror
 
   fun check () (x, y) =
-    Exceptions.assert Obj.eq (MorphType o ObjMismatch) (x, y)
+    Exception.assert Obj.eq (MorphType o ObjMismatch) (x, y)
 
   fun id _ = ()
 

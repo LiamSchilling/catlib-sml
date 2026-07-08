@@ -1,4 +1,4 @@
-structure Exceptions =
+structure Exception =
 struct
   (* Raise to signal that a function cannot be implemented
      according to its theoretical specification. *)

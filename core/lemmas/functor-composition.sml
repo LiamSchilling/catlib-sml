@@ -22,7 +22,7 @@ struct
       mapobj = fn (f, g) => {
         mapobj = (#mapobj f) o (#mapobj g),
         mapmorph = (#mapmorph f) o (#mapmorph g) },
-      mapmorph = fn (n, m) => raise Exceptions.UnimplementedUnexpressible }
+      mapmorph = fn (n, m) => raise Exception.UnimplementedUnexpressible }
 
   (* The horizontal composite of natural transformations `n, m`,
      given the source functor of `n` and the destination functor of `m`.

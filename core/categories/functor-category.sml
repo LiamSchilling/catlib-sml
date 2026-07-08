@@ -27,20 +27,20 @@ struct
   struct
     type t = (C.Obj.t, C.Morph.t, D.Obj.t, D.Morph.t) Functor.funct
 
-    fun eq (f, g) = raise Exceptions.UnimplementedUnexpressible
+    fun eq (f, g) = raise Exception.UnimplementedUnexpressible
   end
 
   structure Morph =
   struct
     type t = (C.Obj.t, D.Morph.t) Functor.nattrans
 
-    fun eq (n, m) = raise Exceptions.UnimplementedUnexpressible
+    fun eq (n, m) = raise Exception.UnimplementedUnexpressible
   end
 
   type morpherror = unit
   exception MorphType of morpherror
 
-  fun check n (f, g) = raise Exceptions.UnimplementedUnexpressible
+  fun check n (f, g) = raise Exception.UnimplementedUnexpressible
 
   fun id (f: Obj.t) = {
     component = fn x => D.id (#mapobj f x) }
@@ -48,5 +48,5 @@ struct
   fun comp (n: Morph.t, m: Morph.t) = {
     component = fn x => D.comp (#component n x, #component m x) }
 
-  fun isid f = raise Exceptions.UnimplementedUnexpressible
+  fun isid f = raise Exception.UnimplementedUnexpressible
 end

@@ -95,7 +95,7 @@ struct
     unit = [],
     product = {
       mapobj = fn (ctx1, ctx2) => ctx1 @ ctx2,
-      mapmorph = fn (_, _) => raise Exceptions.UnimplementedUnexpressible },
+      mapmorph = fn (_, _) => raise Exception.UnimplementedUnexpressible },
     leftproj = fn (ctx1, ctx2) => Ctx.idFrom 0 ctx1,
     rightproj = fn (ctx1, ctx2) => Ctx.idFrom (length ctx1) ctx2,
     pair = fn (sub1, sub2) => sub1 @ sub2 }
