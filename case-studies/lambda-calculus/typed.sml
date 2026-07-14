@@ -52,7 +52,8 @@ struct
       App (t1, substFrom i sub e2, substFrom i sub e1)
 end
 
-(* The term language of simply typed lambda terms up to beta/eta conversion
+(* A minimal specification of
+   the term language of simply typed lambda terms up to beta/eta conversion
    on a base category of types and primitive functions `Base`. *)
 functor SimpleTypesTemplate (Base : CATEGORY) : TERMLANGUAGETEMPLATE =
 struct
@@ -155,3 +156,8 @@ struct
   fun subst sub e = substFrom 0 sub e
   fun apply (t1, e2) e1 = App (t1, e2, e1)
 end
+
+(* The term language of simply typed lambda terms up to beta/eta conversion
+   on a base category of types and primitive functions `Base`. *)
+functor SimpleTypesLanguage (Base : CATEGORY) : TERMLANGUAGE =
+  MakeTermLanguage(SimpleTypesTemplate(Base))

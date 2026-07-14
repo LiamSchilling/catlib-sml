@@ -51,6 +51,7 @@ Library
   functor LambdaCalculusReducer
   structure SimpleTypes
   functor SimpleTypesTemplate
+  functor SimpleTypesLanguage
 is
   data/exception.sml
   data/lazy-list.sml
