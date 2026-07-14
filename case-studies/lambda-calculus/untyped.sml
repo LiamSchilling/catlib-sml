@@ -37,23 +37,26 @@ struct
   (* Substitutes the `i`-level variables in a term
      for the result of evaluating the thunk `e'`,
      and decrements the level of all variables above `i`. *)
-  fun subst i e' (Var j) =
+  fun plug i e' (Var j) =
       if i = j then
         e' ()
       else
         Var (if j < i then j else j - 1)
-    | subst i e' (BaseFun f) = BaseFun f
-    | subst i e' Triv = Triv
-    | subst i e' (Pair (e1, e2)) = Pair (subst i e' e1, subst i e' e2)
-    | subst i e' (Left (t2, e)) = Left (t2, subst i e' e)
-    | subst i e' (Right (t1, e)) = Right (t1, subst i e' e)
-    | subst i e' (Lam e) = Lam (subst (i + 1) e' e)
-    | subst i e' (App (t1, e2, e1)) = App (t1, subst i e' e2, subst i e' e1)
+    | plug i e' (BaseFun f) = BaseFun f
+    | plug i e' Triv = Triv
+    | plug i e' (Pair (e1, e2)) = Pair (plug i e' e1, plug i e' e2)
+    | plug i e' (Left (t2, e)) = Left (t2, plug i e' e)
+    | plug i e' (Right (t1, e)) = Right (t1, plug i e' e)
+    | plug i e' (Lam e) = Lam (plug (i + 1) e' e)
+    | plug i e' (App (t1, e2, e1)) = App (t1, plug i e' e2, plug i e' e1)
 end
 
 (* The beta/eta reduction graph of lambda terms
    with type annotations given by `Note` and base functions given by `Base`. *)
-functor LambdaCalculusGraph (Note : SETOID) (Base : MONOID) : LABELEDDIGRAPH =
+functor LambdaCalculusGraph
+  (Note : SETOID)
+  (Base : HIDDENIDMONOID)
+  : LABELEDDIGRAPH =
 struct
   open LambdaCalculus
 
@@ -64,6 +67,7 @@ struct
     fun eq (Var i, Var j) = (i = j)
       | eq (BaseFun f, BaseFun g) =
         Base.Elem.eq (f, g)
+      | eq (Triv, Triv) = true
       | eq (Pair (e1, e2), Pair (e1', e2')) =
         eq (e1, e1') andalso eq (e2, e2')
       | eq (Left (t2, e), Left (t2', e')) =
@@ -100,12 +104,12 @@ struct
     | check BetaRight (Right (t1, Pair (e1, e2)), e2') =
       checktmeq (e2, e2')
     | check BetaApp (App (t1, Lam e2, e1), e2') =
-      checktmeq (subst 0 (fn () => e1) e2, e2')
+      checktmeq (plug 0 (fn () => e1) e2, e2')
     | check EtaPair (Pair (Left (t2, e), Right (t1, e')), e'') = (
       checktmeq (e, e');
       checktmeq (e, e'') )
     | check EtaLam (Lam (App (t, e, Var 0)), e') =
-      checktmeq (subst 0 (fn () => raise EdgeType (VarInEtaTarget e)) e, e')
+      checktmeq (plug 0 (fn () => raise EdgeType (VarInEtaTarget e)) e, e')
     | check BaseId (BaseFun f, Lam (Var 0)) =
       checkisid f
     | check BaseComp (App (t2, BaseFun f, App (t1, BaseFun g, e)), App (t1', BaseFun h, e')) = (
@@ -141,5 +145,8 @@ end
 (* The beta/eta reduction category of lambda terms
    with type annotations given by `Note` and base functions given by `Base`,
    which is the reflexive and transitive closure of the reduction graph. *)
-functor LambdaCalculusCategory (Note : SETOID) (Base : MONOID) : CATEGORY =
+functor LambdaCalculusCategory
+    (Note : SETOID)
+    (Base : HIDDENIDMONOID)
+    : CATEGORY =
   FreeCategory(LambdaCalculusGraph(Note)(Base))

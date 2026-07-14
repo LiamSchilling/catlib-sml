@@ -3,7 +3,7 @@ Library
   structure LazyList
 
   signature SETOID
-  signature MONOID
+  signature HIDDENIDMONOID
   signature LABELEDDIGRAPH
   signature CATEGORY
   signature GROUPOID
@@ -49,12 +49,14 @@ Library
   functor LambdaCalculusGraph
   functor LambdaCalculusCategory
   functor LambdaCalculusReducer
+  structure SimpleTypes
+  functor SimpleTypesTemplate
 is
   data/exception.sml
   data/lazy-list.sml
 
   core/definitions/setoid.sig
-  core/definitions/monoid.sig
+  core/definitions/hidden-id-monoid.sig
   core/definitions/labeled-digraph.sig
   core/definitions/category.sig
   core/definitions/groupoid.sig
@@ -94,3 +96,4 @@ is
 
   case-studies/lambda-calculus/untyped.sml
   case-studies/lambda-calculus/reducer.sml
+  case-studies/lambda-calculus/typed.sml

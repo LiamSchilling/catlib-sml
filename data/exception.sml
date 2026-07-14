@@ -12,4 +12,19 @@ struct
       ()
     else
       raise err a
+
+  datatype direction = Negative | Unbound
+  exception Subscript of direction
+
+  (* Retrieve the `i`th element of a list for non-negative `i`. *)
+  fun nthpos 0 (x :: X) = x
+    | nthpos i (_ :: X) = nthpos (i - 1) X
+    | nthpos i [] = raise Subscript Unbound
+
+  (* Retrieve the `i`th element of a list. *)
+  fun nth i X =
+    if i < 0 then
+      raise Subscript Negative
+    else
+      nthpos i X
 end

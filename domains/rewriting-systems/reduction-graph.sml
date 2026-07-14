@@ -10,4 +10,12 @@ end
 functor ReductionGraphOf (G : LABELEDDIGRAPH) =
 struct
   type reducer = (G.Node.t, G.Edge.t) ReductionGraph.reducer
+
+  (* Evaluate a term according to a reducer,
+     which simply returns the term stepped once,
+     or the term itself it is already normal. *)
+  fun eval (r: reducer) (x: G.Node.t) : G.Node.t =
+    case #step r x of
+      SOME (_, y) => y
+    | NONE => x
 end

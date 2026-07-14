@@ -1,4 +1,4 @@
-functor LambdaCalculusReducer (Note : SETOID) (Base : MONOID) =
+functor LambdaCalculusReducer (Note : SETOID) (Base : HIDDENIDMONOID) =
 struct
   open LambdaCalculus
 
@@ -21,7 +21,7 @@ struct
      or returns `NONE` if the term is normal. *)
   fun stepTerm (Left (t2, Pair (e1, e2))) = SOME (BetaLeft, e1)
     | stepTerm (Right (t1, Pair (e1, e2))) = SOME (BetaRight, e2)
-    | stepTerm (App (t1, Lam e2, e1)) = SOME (BetaApp, subst 0 (fn () => e1) e2)
+    | stepTerm (App (t1, Lam e2, e1)) = SOME (BetaApp, plug 0 (fn () => e1) e2)
     | stepTerm (BaseFun f) =
       if Base.isid f then SOME (BaseId, Lam (Var 0)) else NONE
     | stepTerm (App (t2, BaseFun f, App (t1, BaseFun g, e))) =
@@ -53,7 +53,7 @@ struct
       | NONE =>
       case e of
         App (t, e', Var 0) => (
-        SOME (EtaLam, subst 0 (fn () => raise EtaLamError) e') handle
+        SOME (EtaLam, plug 0 (fn () => raise EtaLamError) e') handle
           EtaLamError => NONE )
       | _ => NONE )
     | stepTerm (App (t1, e2, e1)) = (
@@ -71,4 +71,8 @@ struct
   (* Iterate the one-step graph to retrieve a full normalizer. *)
   val fullReducer : IteratedReductionGraph.reducer =
     Iter.iterate stepReducer
+
+  (* Fully normalize a lambda term. *)
+  val evalTerm : LambdaCalculusGraph.Node.t -> LambdaCalculusGraph.Node.t =
+    IteratedReductionGraph.eval fullReducer
 end
